@@ -1,0 +1,15 @@
+# Node.js の依存関係（通常は巨大なファイル群になるので）
+node_modules/
+
+# ローカル環境用の環境変数ファイル
+.env
+.env.local
+
+# ビルド成果物や出力ディレクトリ
+.next/
+out/
+dist/
+
+# OS やエディタ固有のファイル
+.DS_Store
+Thumbs.db
