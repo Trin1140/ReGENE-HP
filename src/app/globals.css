@@ -1,10 +1,9 @@
 /* app/globals.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 必要に応じてカスタムスタイルも追加 */
+/* （必要に応じて、ここにカスタムスタイルも追加） */
 
 :root {
   --background: #ffffff;
