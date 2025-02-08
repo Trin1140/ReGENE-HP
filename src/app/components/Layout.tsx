@@ -1,25 +1,28 @@
-// components/Layout.tsx
-import Head from "next/head";
-import Header from "./Header";
-import Footer from "./Footer";
+// app/layout.tsx
+import './globals.css';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Inter } from 'next/font/google';
 
-interface LayoutProps {
-  children: React.ReactNode;
-  title?: string;
-}
+const inter = Inter({ subsets: ['latin'] });
 
-export default function Layout({ children, title = "学生のまちづくりプロジェクト" }: LayoutProps) {
+export const metadata = {
+  title: 'Re-GENE',
+  description: 'Re-GENE organization website',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content="学生のまちづくりプロジェクトの公式ホームページ" />
-      </Head>
-      <Header />
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {children}
-      </main>
-      <Footer />
-    </div>
+    <html lang="ja">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className={inter.className}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
   );
 }

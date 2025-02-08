@@ -1,6 +1,10 @@
+/* app/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 必要に応じてカスタムスタイルも追加 */
 
 :root {
   --background: #ffffff;
@@ -18,4 +22,19 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* フェードアウトのキーフレーム定義 */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+/* オーバーレイ用のアニメーション */
+.animate-fadeOut {
+  animation: fadeOut 1.5s ease-in-out forwards;
 }

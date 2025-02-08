@@ -8,21 +8,24 @@ export default function Projects() {
     {
       id: 1,
       title: "プロジェクトA",
-      description: "プロジェクトAは地域活性化を目的とした取り組みです。地域の魅力を再発見するためのイベントを多数開催しています。",
+      description:
+        "プロジェクトAは地域活性化を目的とした取り組みです。地域の魅力を再発見するためのイベントを多数開催しています。",
       image: "/project-a.jpg", // public/ フォルダ内に配置
-      link: "/projects/a",     // 詳細ページへのリンク（詳細ページを後で作成）
+      link: "/projects/a", // 詳細ページへのリンク
     },
     {
       id: 2,
       title: "プロジェクトB",
-      description: "プロジェクトBは学生によるまちづくりの実践プロジェクト。最新技術を活用したまちのインフラ整備を目指しています。",
+      description:
+        "プロジェクトBは学生によるまちづくりの実践プロジェクト。最新技術を活用したまちのインフラ整備を目指しています。",
       image: "/project-b.jpg",
       link: "/projects/b",
     },
     {
       id: 3,
       title: "プロジェクトC",
-      description: "プロジェクトCは環境保全と地域コミュニティの発展を両立する新たな試みです。",
+      description:
+        "プロジェクトCは環境保全と地域コミュニティの発展を両立する新たな試みです。",
       image: "/project-c.jpg",
       link: "/projects/c",
     },
@@ -37,24 +40,18 @@ export default function Projects() {
             key={project.id}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
-            {/* プロジェクト画像 */}
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={400}
-              height={250}
-              className="object-cover w-full h-56"
-            />
+            {/* 画像を相対配置のコンテナでラップして、固定高さで表示 */}
+            <div className="relative w-full h-56">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover"
+              />
+            </div>
             <div className="p-4">
-              {/* プロジェクトタイトル */}
-              <h2 className="text-2xl font-semibold mb-2">
-                {project.title}
-              </h2>
-              {/* プロジェクト概要 */}
-              <p className="text-gray-700 mb-4">
-                {project.description}
-              </p>
-              {/* 詳細ページへのリンク */}
+              <h2 className="text-2xl font-semibold mb-2">{project.title}</h2>
+              <p className="text-gray-700 mb-4">{project.description}</p>
               <Link
                 href={project.link}
                 className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded inline-block"
