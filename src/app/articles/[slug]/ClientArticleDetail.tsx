@@ -1,19 +1,10 @@
 // src/app/articles/[slug]/ClientArticleDetail.tsx
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import MdxRenderer from "@/components/MdxRenderer";
 import type { MDXRemoteSerializeResult } from "next-mdx-remote";
-
-// MDXRemote を動的に読み込み、SSR を無効化する
-const MDXRemoteDynamic = dynamic(
-  async () => {
-    const mod = await import("next-mdx-remote");
-    return mod.MDXRemote;
-  },
-  { ssr: false }
-);
 
 interface ClientArticleDetailProps {
   title: string;
@@ -34,16 +25,11 @@ export default function ClientArticleDetail({
       <p className="text-sm text-gray-600 mb-4">{date}</p>
       {image && (
         <div className="relative w-full h-64 mb-6">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover rounded-md"
-          />
+          <Image src={image} alt={title} fill className="object-cover rounded-md" />
         </div>
       )}
       <div className="prose prose-lg mb-8">
-        <MDXRemoteDynamic {...mdxSource} />
+        <MdxRenderer mdxSource={mdxSource} />
       </div>
       <Link href="/articles" className="text-blue-500 hover:underline">
         ← 記事一覧に戻る
