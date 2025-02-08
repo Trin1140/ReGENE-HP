@@ -1,18 +1,25 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import type { MDXRemoteSerializeResult } from "next-mdx-remote";
-
-// MDXRemote を通常のインポートではなく、動的にインポートして SSR を無効化します。
-const MDXRemoteDynamic = dynamic(
-  () => import("next-mdx-remote").then((mod) => mod.MDXRemote),
-  { ssr: false }
-);
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { useEffect, useState } from "react";
 
 interface MdxRendererProps {
   mdxSource: MDXRemoteSerializeResult;
 }
 
 export default function MdxRenderer({ mdxSource }: MdxRendererProps) {
-  return <MDXRemoteDynamic {...mdxSource} />;
+  // マウント後にレンダリングするための状態管理
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // マウント前は何もレンダリングしない
+  if (!isMounted) {
+    return null;
+  }
+
+  // マウント後は MDXRemote をレンダリング（このタイミングはクライアント側なので、useState も正常に動作する）
+  return <MDXRemote {...mdxSource} />;
 }
