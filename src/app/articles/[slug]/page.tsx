@@ -1,10 +1,9 @@
-// src/app/articles/[slug]/page.tsx
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import { notFound } from "next/navigation";
-import ClientArticleDetail from "./ClientArticleDetail";
+import ClientArticleDetail from "@/components/ClientArticleDetail"; // インポートパスを更新
 
 export async function generateStaticParams() {
   const articlesDirectory = path.join(process.cwd(), "content", "articles");
