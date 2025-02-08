@@ -1,8 +1,9 @@
+// src/app/articles/[slug]/ClientArticleDetail.tsx
 "use client";
 
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Image from "next/image";
 import Link from "next/link";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
 interface ClientArticleDetailProps {
   title: string;
@@ -23,12 +24,7 @@ export default function ClientArticleDetail({
       <p className="text-sm text-gray-600 mb-4">{date}</p>
       {image && (
         <div className="relative w-full h-64 mb-6">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover rounded-md"
-          />
+          <Image src={image} alt={title} fill className="object-cover rounded-md" />
         </div>
       )}
       <div className="prose prose-lg mb-8">
