@@ -1,15 +1,22 @@
 // app/api/contact/route.ts
-import { NextResponse } from "next/server";
 import admin from "@/lib/firebaseAdmin";
 
-export async function POST(request: Request) {
-  let data: any;
+// リクエストボディとして期待する型を定義
+interface ContactRequest {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export async function POST(request: Request): Promise<Response> {
+  let data: ContactRequest;
 
   // リクエストボディのパースと検証
   try {
-    data = await request.json();
+    // JSON の内容を ContactRequest 型として扱う
+    data = (await request.json()) as ContactRequest;
   } catch (parseError) {
-    console.error("Invalid JSON received: " + JSON.stringify({ parseError }));
+    console.error("Invalid JSON received:", parseError);
     return new Response(
       JSON.stringify({ error: "不正なJSON形式です。" }),
       {
@@ -55,16 +62,14 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error: any) {
-    // error がオブジェクト以外の場合は必ずオブジェクトにラップする
+  } catch (error: unknown) {
+    // error がオブジェクトでない場合は、文字列化してオブジェクトにラップする
     const errPayload =
       error && typeof error === "object"
         ? error
-        : { message: error ?? "Unknown error" };
+        : { message: String(error) };
 
-    // エラー内容を JSON 文字列にしてログ出力することで、Next.js の内部ロガーが
-    // 受け取る値が常に文字列になるようにする
-    console.error("Error saving contact: " + JSON.stringify(errPayload));
+    console.error("Error saving contact:", JSON.stringify(errPayload));
 
     return new Response(
       JSON.stringify({ error: "データの処理中にエラーが発生しました。" }),
