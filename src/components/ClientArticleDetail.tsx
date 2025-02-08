@@ -1,37 +1,26 @@
-"use client";
+"use client"; // 🚀 クライアントコンポーネントとして明示
 
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Image from "next/image";
-import Link from "next/link";
 
-interface ClientArticleDetailProps {
+interface Props {
   title: string;
   date: string;
   image?: string;
-  mdxSource: MDXRemoteSerializeResult;
+  mdxSource: MDXRemoteSerializeResult | null;
 }
 
-export default function ClientArticleDetail({
-  title,
-  date,
-  image,
-  mdxSource,
-}: ClientArticleDetailProps) {
+export default function ClientArticleDetail({ title, date, image, mdxSource }: Props) {
+  if (!mdxSource) {
+    return <p>記事のデータが読み込めませんでした。</p>;
+  }
+
   return (
-    <main className="max-w-5xl mx-auto p-8">
-      <h1 className="text-4xl font-bold mb-4">{title}</h1>
-      <p className="text-sm text-gray-600 mb-4">{date}</p>
-      {image && (
-        <div className="relative w-full h-64 mb-6">
-          <Image src={image} alt={title} fill className="object-cover rounded-md" />
-        </div>
-      )}
-      <div className="prose prose-lg mb-8">
-        <MDXRemote {...mdxSource} />
-      </div>
-      <Link href="/articles" className="text-blue-500 hover:underline">
-        ← 記事一覧に戻る
-      </Link>
-    </main>
+    <div>
+      <h1>{title}</h1>
+      <p>{date}</p>
+      {image && <Image src={image} alt={title} width={600} height={400} />}
+      <MDXRemote {...mdxSource} />
+    </div>
   );
 }
