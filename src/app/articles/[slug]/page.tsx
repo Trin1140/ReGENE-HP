@@ -24,7 +24,7 @@ export default async function ArticleDetail({ params }: { params: { slug: string
   let fileContent;
   try {
     fileContent = await fs.readFile(filePath, 'utf8');
-  } catch (_error) {
+  } catch {
     notFound();
   }
   
