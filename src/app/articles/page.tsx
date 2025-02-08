@@ -1,38 +1,45 @@
-// app/articles/page.tsx
-import Image from "next/image";
-import Link from "next/link";
+// src/app/articles/page.tsx
+import fs from 'fs/promises';
+import path from 'path';
+import matter from 'gray-matter';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function Articles() {
-  // サンプル記事データ（実際は CMS や API から取得することも可能）
-  const articles = [
-    {
-      id: 1,
-      title: "未来を切り拓く学生たちの挑戦",
-      summary:
-        "地域の課題に挑む学生たちが、革新的なアイデアで新しい未来を創造するプロジェクトをレポート。",
-      image: "/article1.jpg", // public/article1.jpg
-      date: "2025-02-01",
-      link: "/articles/1",
-    },
-    {
-      id: 2,
-      title: "成功への道：地域密着型イノベーション",
-      summary:
-        "地域の声に耳を傾け、共に成長するプロジェクトの裏側に迫るインタビュー記事。",
-      image: "/article2.jpg", // public/article2.jpg
-      date: "2025-01-20",
-      link: "/articles/2",
-    },
-    {
-      id: 3,
-      title: "変革を生むアイディアの現場から",
-      summary:
-        "実際の現場で試行錯誤されるアイデアとその成果。現場の生の声をお届けします。",
-      image: "/article3.jpg", // public/article3.jpg
-      date: "2025-01-15",
-      link: "/articles/3",
-    },
-  ];
+// 各記事のメタデータの型定義
+interface ArticleMeta {
+  title: string;
+  date: string;
+  image?: string;
+  summary?: string;
+  slug: string;
+}
+
+export default async function Articles() {
+  // MDX ファイルが格納されているディレクトリのパスを生成
+  const articlesDirectory = path.join(process.cwd(), 'content', 'articles');
+  // ディレクトリ内のすべてのファイル名を取得
+  const filenames = await fs.readdir(articlesDirectory);
+
+  // 各 MDX ファイルのフロントマターから記事情報を読み込む
+  const articles: ArticleMeta[] = await Promise.all(
+    filenames.map(async (filename) => {
+      const filePath = path.join(articlesDirectory, filename);
+      const fileContent = await fs.readFile(filePath, 'utf8');
+      const { data } = matter(fileContent);
+
+      // data から必要な情報を取得し、ファイル名から拡張子を除いた部分を slug として追加
+      return {
+        title: data.title as string,
+        date: data.date as string,
+        image: data.image as string | undefined,
+        summary: data.summary as string | undefined,
+        slug: filename.replace(/\.mdx?$/, ''),
+      };
+    })
+  );
+
+  // 日付の降順にソート（new Date(...) の getTime() で数値に変換）
+  articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <main className="font-sans text-gray-800">
@@ -40,7 +47,7 @@ export default function Articles() {
       <section className="relative h-96">
         <div className="relative w-full h-full">
           <Image
-            src="/images/articles-hero.jpg" // public/images/articles-hero.jpg  ※記事一覧用のヒーロー画像
+            src="/images/articles-hero.jpg"
             alt="記事一覧のヒーロー画像"
             fill
             className="object-cover"
@@ -64,27 +71,32 @@ export default function Articles() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
               <div
-                key={article.id}
+                key={article.slug}
                 className="bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105"
               >
-                {/* 記事画像 */}
-                <div className="relative w-full h-56">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                {/* 記事内容 */}
+                {article.image && (
+                  <div className="relative w-full h-56">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold mb-2 hover:underline cursor-pointer">
-                    {article.title}
-                  </h2>
-                  <p className="text-sm text-gray-600 mb-2">{article.date}</p>
-                  <p className="text-lg leading-relaxed mb-4">{article.summary}</p>
                   <Link
-                    href={article.link}
+                    href={`/articles/${article.slug}`}
+                    className="block text-2xl font-bold mb-2 hover:underline"
+                  >
+                    {article.title}
+                  </Link>
+                  <p className="text-sm text-gray-600 mb-2">{article.date}</p>
+                  <p className="text-lg leading-relaxed mb-4">
+                    {article.summary}
+                  </p>
+                  <Link
+                    href={`/articles/${article.slug}`}
                     className="inline-block bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded transition-colors duration-300"
                   >
                     詳細を見る →

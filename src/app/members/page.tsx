@@ -5,34 +5,34 @@ export default function MembersPage() {
   const featuredMembers = [
     {
       id: 1,
-      name: "山田 太郎",
-      grade: "3年生",
-      affiliation: "プログラミング部",
+      name: "泉川 時",
+      grade: "博士3年",
+      affiliation: "早稲田大学 建築学科 後藤春彦研究室",
       image: "/images/member1.jpg",
     },
     {
       id: 2,
-      name: "佐藤 花子",
-      grade: "2年生",
-      affiliation: "デザイン部",
+      name: "林 泰地",
+      grade: "修士2年",
+      affiliation: "早稲田大学 建築学科 後藤春彦研究室",
       image: "/images/member2.jpg",
     },
     {
       id: 3,
-      name: "鈴木 次郎",
-      grade: "1年生",
-      affiliation: "マーケティング部",
+      name: "各務 弓太",
+      grade: "修士2年",
+      affiliation: "早稲田大学 建築学科 後藤春彦研究室",
       image: "/images/member3.jpg",
     },
   ];
 
   const otherMembers = [
-    { id: 4, name: "高橋 三郎", grade: "3年生", affiliation: "経営学部" },
-    { id: 5, name: "中村 四郎", grade: "2年生", affiliation: "ロボット工学部" },
-    { id: 6, name: "加藤 五郎", grade: "1年生", affiliation: "情報科学部" },
-    { id: 7, name: "伊藤 七郎", grade: "3年生", affiliation: "法学部" },
-    { id: 8, name: "渡辺 八郎", grade: "2年生", affiliation: "文学部" },
-    { id: 9, name: "斎藤 九郎", grade: "1年生", affiliation: "理学部" },
+    { id: 4, name: "加賀谷 唯", grade: "修士2年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 5, name: "上原 祐輝", grade: "修士1年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 6, name: "櫻井 友紀子", grade: "修士1年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 7, name: "永田 一真", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 8, name: "松島 汐音", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 9, name: "海老澤 理々華", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
   ];
 
   // Other Members を学年ごとにグループ化
@@ -72,7 +72,7 @@ export default function MembersPage() {
       <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
         {/* Featured Members セクション */}
         <h2 className="text-3xl font-bold mb-6 border-b pb-2 text-center">
-          Featured Members
+          Members
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
           {featuredMembers.map((member) => (
@@ -98,7 +98,7 @@ export default function MembersPage() {
 
         {/* Other Members セクション */}
         <h2 className="text-3xl font-bold mb-6 border-b pb-2 text-center">
-          Other Members
+          
         </h2>
         <div className="space-y-8">
           {sortedGrades.map((grade) => (
@@ -113,7 +113,7 @@ export default function MembersPage() {
                     <div>
                       <h4 className="text-2xl font-bold">{member.name}</h4>
                       <p className="text-lg text-gray-600">
-                        学年: {member.grade} | 所属: {member.affiliation}
+                         | 所属: {member.affiliation}
                       </p>
                     </div>
                   </div>

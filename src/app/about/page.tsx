@@ -19,7 +19,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-white text-4xl sm:text-5xl font-bold">
-              団体のご紹介
+              ReGENEとは
             </h1>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* 団体概要セクション */}
       <section className="py-16 px-4 md:px-8 max-w-5xl mx-auto">
         <h2 className="text-3xl font-semibold mb-8 text-center">
-          私たちのミッション
+          Mission
         </h2>
         <p className="text-lg mb-12 leading-relaxed">
           私たちは、革新的なアプローチで社会の課題を解決し、地域コミュニティの発展に寄与することを目指しています。<br />
@@ -38,7 +38,7 @@ export default function AboutPage() {
           {/* 団体メンバーの画像 */}
           <div className="md:w-1/2">
             <Image
-              src="/images/organization-team.jpg" // public/images/organization-team.jpg に配置
+              src="/images/about/01-concept.png" // public/images/organization-team.jpg に配置
               alt="団体チーム"
               width={600}
               height={400}
@@ -58,13 +58,13 @@ export default function AboutPage() {
       <section className="py-16 bg-gray-100">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <h2 className="text-3xl font-semibold mb-8 text-center">
-            活動実績
+            主な活動
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* プロジェクトカード 1：プロジェクトA */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <Image
-                src="/images/project1.jpg" // public/images/project1.jpg に配置
+                src="/images/projects/usa/02-top-hunadama.jpg" // public/images/project1.jpg に配置
                 alt="プロジェクトA"
                 width={600}
                 height={400}
@@ -73,11 +73,11 @@ export default function AboutPage() {
               <div className="p-6">
                 <Link href="/projects/a">
                   <h3 className="text-2xl font-bold mb-2 hover:underline cursor-pointer">
-                    プロジェクトA
+                    船玉神社再生プロジェクト
                   </h3>
                 </Link>
                 <p className="text-lg leading-relaxed">
-                  このプロジェクトでは、地域の課題に対して革新的な解決策を提供し、多くの成果を上げました。
+                  香川県高松市の海の安全を守ってきた神社を、地域を見守る神社へと読み替える祭りを計画した。
                 </p>
               </div>
             </div>
@@ -93,11 +93,11 @@ export default function AboutPage() {
               <div className="p-6">
                 <Link href="/projects/b">
                   <h3 className="text-2xl font-bold mb-2 hover:underline cursor-pointer">
-                    プロジェクトB
+                    Next project
                   </h3>
                 </Link>
                 <p className="text-lg leading-relaxed">
-                  地域の発展と環境保全を目指したプロジェクトで、持続可能な未来への第一歩を実現しました。
+                  Next project
                 </p>
               </div>
             </div>

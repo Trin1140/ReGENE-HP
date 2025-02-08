@@ -1,4 +1,3 @@
-// src/app/projects/a/page.tsx
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
@@ -9,7 +8,7 @@ export default async function ProjectA() {
   // 関連する記事情報を取得する処理
   const articlesDirectory = path.join(process.cwd(), 'content', 'articles');
 
-  // 型定義: 関連記事情報に必要な項目
+  // 各記事のメタデータの型定義
   interface RelatedArticle {
     title: string;
     date: string;
@@ -34,7 +33,7 @@ export default async function ProjectA() {
         };
       })
     );
-    // 作成日（date）の降順（最新の記事が先頭）にソート
+    // 日付の降順（最新の記事が先頭）にソート
     articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   } catch (error) {
     console.error("Error reading articles directory:", error);
@@ -71,43 +70,40 @@ export default async function ProjectA() {
         <h2 className="text-2xl font-bold mt-8 mb-2">実施期間</h2>
         <p className="text-lg text-gray-700">2025年1月 ～ 2025年12月</p>
       </div>
-
+      
       {/* 参加者の欄 */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mt-8 mb-2">協力</h2>
         <p className="text-lg text-gray-700">
-          宇佐八幡宮、香西小学校、香西観光協会、リンクアーキテクツ、香西漁業協同組合、香西地区コミュニティ協議会、笠井郷文化財等振興協議会
+          宇佐八幡宮、香西小学校、香西観光協会、リンクアーキテクツ、香西漁業協同組合、
+          香西地区コミュニティ協議会、笠井郷文化財等振興協議会
         </p>
       </div>
 
-      {/* 関連する記事の欄：横スクロールで表示 */}
+      {/* 関連する記事の欄（ヒーロー風カードレイアウト） */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold mt-8 mb-2">関連する記事</h2>
-        <div className="overflow-x-auto">
-          <div className="flex space-x-4">
-            {articles.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/articles/${article.slug}`}
-                className="flex-shrink-0 w-48 border border-gray-200 rounded p-2 bg-white"
-              >
-                {article.image && (
-                  <div className="relative w-full h-24">
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                )}
-                <div className="mt-2">
-                  <h3 className="text-sm font-bold">{article.title}</h3>
-                  <p className="text-xs text-gray-500">{article.date}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/articles/${article.slug}`}
+              className="relative block group h-64 rounded-lg overflow-hidden"
+            >
+              {article.image && (
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              )}
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <h3 className="text-white text-xl font-bold">{article.title}</h3>
+                <p className="text-white text-sm mt-2">{article.date}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 

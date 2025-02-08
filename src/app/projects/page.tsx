@@ -8,27 +8,19 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "プロジェクトA",
+      title: "船玉神社再生プロジェクト",
       description:
         "プロジェクトAは地域活性化を目的とした取り組みです。地域の魅力を再発見するためのイベントを多数開催しています。",
-      image: "/project-a.jpg", // public/ フォルダ内に配置
+      image: "/images/projects/usa/02-top-hunadama.jpg", // public/ フォルダ内に配置
       link: "/projects/a",      // 詳細ページへのリンク
     },
     {
       id: 2,
-      title: "プロジェクトB",
+      title: "Next project",
       description:
-        "プロジェクトBは学生によるまちづくりの実践プロジェクト。最新技術を活用したまちのインフラ整備を目指しています。",
+        "Next project",
       image: "/project-b.jpg",
       link: "/projects/b",
-    },
-    {
-      id: 3,
-      title: "プロジェクトC",
-      description:
-        "プロジェクトCは環境保全と地域コミュニティの発展を両立する新たな試みです。",
-      image: "/project-c.jpg",
-      link: "/projects/c",
     },
   ];
 
