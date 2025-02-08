@@ -1,8 +1,12 @@
 // src/components/MdxRenderer.tsx
 "use client";
 
-import { MDXRemote } from 'next-mdx-remote';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-export default function MdxRenderer({ mdxSource }: { mdxSource: any }) {
+interface MdxRendererProps {
+  mdxSource: MDXRemoteSerializeResult;
+}
+
+export default function MdxRenderer({ mdxSource }: MdxRendererProps) {
   return <MDXRemote {...mdxSource} />;
 }
