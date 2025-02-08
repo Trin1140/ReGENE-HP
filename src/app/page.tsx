@@ -1,4 +1,3 @@
-// app/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +8,7 @@ export default function Home() {
       <section className="relative h-screen">
         <div className="absolute inset-0">
           <Image 
-            src="/hero-background.jpg"        // public フォルダ内の背景画像
+            src="/image/projects/usa/01-top-usa.png"  // 新しいフォルダに配置した背景画像
             alt="ヒーロー背景"
             fill
             className="object-cover"
@@ -29,14 +28,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* その他のセクションはそのまま */}
+      {/* その他のセクション */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">最新情報</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Image 
-                src="/event1.jpg"
+                src="/image/projects/usa/event1.jpg"  // 新しいフォルダに配置したイベント画像1
                 alt="イベント1"
                 width={400}
                 height={250}
@@ -48,7 +47,7 @@ export default function Home() {
             {/* カード2 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Image 
-                src="/event2.jpg"
+                src="/image/projects/usa/event2.jpg"  // 新しいフォルダに配置したイベント画像2
                 alt="イベント2"
                 width={400}
                 height={250}
@@ -60,7 +59,7 @@ export default function Home() {
             {/* カード3 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <Image 
-                src="/event3.jpg"
+                src="/image/projects/usa/event3.jpg"  // 新しいフォルダに配置したイベント画像3
                 alt="イベント3"
                 width={400}
                 height={250}
