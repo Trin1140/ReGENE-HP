@@ -6,13 +6,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import dynamic from 'next/dynamic';
-
-// MDXRemote を使うコンポーネント（MdxRenderer）を動的に読み込み、サーバー側ではレンダリングしないように設定
-const MdxRendererDynamic = dynamic(
-  () => import('@/components/MdxRenderer'),
-  { ssr: false }
-);
+import MdxRenderer from '@/components/MdxRenderer'; // クライアントコンポーネントとしてインポート
 
 export async function generateStaticParams() {
   const articlesDirectory = path.join(process.cwd(), 'content', 'articles');
@@ -33,8 +27,9 @@ export default async function ArticleDetail({ params }: { params: { slug: string
     notFound();
   }
   
-  // フロントマターと本文を分割
+  // フロントマターと本文に分割
   const { data, content } = matter(fileContent);
+  
   // MDXコンテンツをシリアライズ
   const mdxSource = await serialize(content);
 
@@ -53,8 +48,7 @@ export default async function ArticleDetail({ params }: { params: { slug: string
         </div>
       )}
       <div className="prose prose-lg mb-8">
-        {/* クライアント側でのみレンダリングされる MdxRendererDynamic を使用 */}
-        <MdxRendererDynamic mdxSource={mdxSource} />
+        <MdxRenderer mdxSource={mdxSource} />
       </div>
       <Link href="/articles" className="text-blue-500 hover:underline">
         ← 記事一覧に戻る
