@@ -1,12 +1,11 @@
-// src/app/articles/[slug]/page.tsx
+// このファイルはサーバーコンポーネントとして、データ取得とシリアライズのみを行います。
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import { notFound } from "next/navigation";
-import ClientArticleDetail from "./ClientArticleDetail"; // クライアントコンポーネントをインポート
+import ClientArticleDetail from "./ClientArticleDetail";
 
-// サーバーコンポーネントとして generateStaticParams() をエクスポートする
 export async function generateStaticParams() {
   const articlesDirectory = path.join(process.cwd(), "content", "articles");
   const filenames = await fs.readdir(articlesDirectory);
@@ -30,7 +29,6 @@ export default async function ArticleDetail({ params }: { params: { slug: string
   const mdxSource = await serialize(content);
 
   return (
-    // データ取得とシリアライズはサーバー側で行い、クライアント専用のレンダリングは ClientArticleDetail に任せる
     <ClientArticleDetail
       title={data.title as string}
       date={data.date as string}
