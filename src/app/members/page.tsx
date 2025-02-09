@@ -33,6 +33,7 @@ export default function MembersPage() {
     { id: 7, name: "永田 一真", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
     { id: 8, name: "松島 汐音", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
     { id: 9, name: "海老澤 理々華", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },
+    { id: 10, name: "中内 晶太", grade: "学部4年", affiliation: "早稲田大学 建築学科 後藤春彦研究室" },  
   ];
 
   // Other Members を学年ごとにグループ化

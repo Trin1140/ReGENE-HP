@@ -113,7 +113,7 @@ export default function AboutPage() {
           </h2>
           <div className="flex flex-wrap gap-6 justify-center">
             <a
-              href="https://www.organization-website.com"
+              href="https://www.goto.arch.waseda.ac.jp/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-primary hover:text-primary-dark text-lg"
